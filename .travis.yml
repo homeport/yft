@@ -1,0 +1,39 @@
+---
+language: go
+go:
+- 1.12.x
+
+cache:
+  directories:
+  - $GOPATH/pkg/mod
+
+os:
+- linux
+
+install:
+- curl --silent --location https://goo.gl/g1CpPX | bash -s v1.0.8
+
+script:
+- export GO111MODULE=on
+- go mod download
+- go mod verify
+- make test
+
+after_success:
+- for FILE in $(find . -type f -name "*.coverprofile" 2>/dev/null); do echo >>$FILE; done
+- gover . coverage.txt
+- bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
+- make build
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: ebBTHp1rBRmi9zzei6U+ppyzJMeNY+ue0BaEDSR1nFT8udZibukunz/FAe1RJG/kR/ojdTB826FpRevXVgfDTTKYwpN+kBYu7FmTT5hyg/rB27arsi7ZFUozik6gpIpKntMZFQ2VGSowF2tJU7pD8zMNezxWxtXtoYUr/vFVSFM4IbNei7lierZquUognw0/s24uI+4jpT3/vFo4Nj7icHqkcoFnaXPUlq7MpXEKoWPsq55TuCoYDLDtyrocbD9L7jbxBEwa8r0Vue41EpmD4CCtZVWLDDXXAHAWiKfY2ihWWf7eZk6wM5aMh0lLdWrh4qZgaCtPbVmI0gnc/nf5do67W18wZhWrNxuDfMdh8zipFqL4ZUAuA6xepwFwO9vKhEWRLv8r+LfseuSeYcnHAD4S+8XipmLIh9QySbiPwbmTmtMEa+iSxiNJLy2iBTFppFjNz9+mhhW9cfOcPFtYVKrM5yqaCRd29QjKYHQsZD+VM2KkStVHT6gPh+3VGwJDJ/N+qnNRO6x6QYnaBRK7wKcjOB/7WAb8tALsiKTSsVF4CTYCySl2aHcTrq5VLsAWlwYzV3bjV4xfwk1r9uuLHlhWSiHKrBt/oY3SFOhcVYC+1dQcaJeFkIvGg8P+tTAd7mB8feO3lCIHOAh/vsTnPemtO1lMNIINtR3z91judrE=
+  file_glob: true
+  file: binaries/*
+  on:
+    condition: $TRAVIS_GO_VERSION =~ ^1\.12
+    tags: true
