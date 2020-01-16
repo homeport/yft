@@ -71,7 +71,7 @@ There are different ways to get `yft`. You are free to pick the one that makes t
 - Use a convenience script to download the latest release to install it in a suitable location on your local machine:
 
   ```sh
-  curl -sL https://git.io/JvUhT | bash
+  curl -sL https://git.io/JvUjf | bash
   ```
 
 ## Contributing
