@@ -38,10 +38,37 @@ var inplace bool
 
 // restructureCmd represents the paths command
 var restructureCmd = &cobra.Command{
-	Use:           "restructure <file>",
-	Args:          cobra.ExactArgs(1),
-	Short:         "Restructure the order of keys",
-	Long:          renderLongDescription(),
+	Use:   "restructure <file>",
+	Args:  cobra.ExactArgs(1),
+	Short: "Restructure the order of keys",
+	Long: func() string {
+		exampleYAML := `---
+releases:
+- sha1: 5ab3b7e685ca18a47d0b4a16d0e3b60832b0a393
+  name: binary-buildpack
+  version: 1.0.32
+  url: https://bosh.io/d/github.com/cloudfoundry/binary-buildpack-release?v=1.0.32
+`
+
+		var data yamlv3.Node
+		yamlv3.Unmarshal([]byte(exampleYAML), &data)
+
+		before, _ := neat.ToYAMLString(data)
+		ytbx.RestructureObject(&data)
+		after, _ := neat.ToYAMLString(data)
+
+		return bunt.Sprintf(`Restructure the order of keys in YAML maps.
+
+The restucture logic tries to put human friendly and identifying keys such as
+the name, or id key before other entries.
+
+Example:
+%s
+
+Result:
+%s
+`, before, after)
+	}(),
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -100,29 +127,4 @@ func init() {
 
 	restructureCmd.PersistentFlags().BoolVarP(&inplace, "in-place", "i", false, "overwrite input file with output of this command")
 	restructureCmd.PersistentFlags().BoolVarP(&ytbx.DisableRemainingKeySort, "disable-remaining-key-sort", "s", false, "disables that all unknown keys are sorted to improve the readability")
-}
-
-func renderLongDescription() string {
-	var data yamlv3.Node
-	yamlv3.Unmarshal([]byte(`---
-releases:
-- sha1: 5ab3b7e685ca18a47d0b4a16d0e3b60832b0a393
-  name: binary-buildpack
-  version: 1.0.32
-  url: https://bosh.io/d/github.com/cloudfoundry/binary-buildpack-release?v=1.0.32
-`), &data)
-
-	before, _ := neat.ToYAMLString(data)
-
-	ytbx.RestructureObject(&data)
-	after, _ := neat.ToYAMLString(data)
-
-	return bunt.Sprintf(`Restructure the order of keys in YAML maps
-	
-Example:
-%s
-
-Result:
-%s
-`, before, after)
 }

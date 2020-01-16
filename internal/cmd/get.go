@@ -41,9 +41,14 @@ var getCmd = &cobra.Command{
 		location := args[0]
 		pathString := args[1]
 
-		obj, err := get(location, pathString)
+		inputfile, err := ytbx.LoadFile(location)
 		if err != nil {
-			return wrap.Error(err, "failed to get path from file")
+			return err
+		}
+
+		obj, err := ytbx.Grab(inputfile.Documents[0], pathString)
+		if err != nil {
+			return err
 		}
 
 		boldKeys := true
@@ -62,21 +67,4 @@ var getCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(getCmd)
-}
-
-// get returns the data that is stored in the provided YAML file at the given
-// path. There are two types of path supported: A dot-style path
-// (yaml.structure.one) and GoPatch-style paths (/yaml/structure/name=one).
-func get(location string, pathString string) (interface{}, error) {
-	inputfile, err := ytbx.LoadFile(location)
-	if err != nil {
-		return nil, err
-	}
-
-	content, err := ytbx.Grab(inputfile.Documents[0], pathString)
-	if err != nil {
-		return nil, err
-	}
-
-	return content, nil
 }

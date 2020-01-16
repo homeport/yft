@@ -23,6 +23,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/gonvenience/bunt"
 	"github.com/gonvenience/wrap"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
@@ -33,14 +34,26 @@ var pathsCmd = &cobra.Command{
 	Use:   "paths <file>",
 	Args:  cobra.ExactArgs(1),
 	Short: "List all paths to values",
-	Long: `Lists all paths to values for example a YAML file like
----
+	Long: func() string {
+		exampleYAML := `---
 yaml:
   structure:
     somekey: foobar
+`
 
-would list you one path: /yaml/structure/somekey
+		examplePath := "/yaml/structure/somekey"
+
+		return bunt.Sprintf(`Lists all paths to values in the given YAML file.
+
+Example:
+%s
+
+would list you one path: %s
 `,
+			neatYAML(exampleYAML),
+			examplePath,
+		)
+	}(),
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {

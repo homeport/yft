@@ -1,0 +1,7 @@
+---
+list:
+- name: one
+  somekey: foobar
+
+map:
+  foo: bar

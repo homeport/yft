@@ -20,8 +20,29 @@
 
 package main
 
-import "github.com/homeport/yft/internal/cmd"
+import (
+	"os"
+
+	"github.com/gonvenience/bunt"
+	"github.com/gonvenience/wrap"
+	"github.com/homeport/yft/internal/cmd"
+)
 
 func main() {
-	cmd.Execute()
+	if err := cmd.Execute(); err != nil {
+		switch ctxErr := err.(type) {
+		case wrap.ContextError:
+			bunt.Printf("Red{*Error:*} LightCoral{%s}\n%v\n",
+				ctxErr.Context(),
+				ctxErr.Cause(),
+			)
+
+		default:
+			bunt.Printf("Red{*Error:*}\n%v\n",
+				err,
+			)
+		}
+
+		os.Exit(1)
+	}
 }

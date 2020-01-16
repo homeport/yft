@@ -22,11 +22,8 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/gonvenience/bunt"
 	"github.com/gonvenience/neat"
-	"github.com/gonvenience/wrap"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
 )
@@ -40,32 +37,15 @@ var rootCmd = &cobra.Command{
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		switch ctxErr := err.(type) {
-		case wrap.ContextError:
-			bunt.Printf("Red{*Error:*} LightCoral{%s}\n%v\n",
-				ctxErr.Context(),
-				ctxErr.Cause(),
-			)
-
-		default:
-			bunt.Printf("Red{*Error:*}\n%v\n",
-				err,
-			)
-		}
-
-		os.Exit(1)
-	}
+func Execute() error {
+	return rootCmd.Execute()
 }
 
 func getPathHelp() string {
-	exampleData, _ := ytbx.LoadYAMLDocuments([]byte(`---
+	exampleYAML := `---
 list:
 - name: one
-  somekey: foobar`))
-
-	neatOutput, _ := neat.ToYAMLString(exampleData[0])
+  somekey: foobar`
 
 	examplePath := ytbx.Path{PathElements: []ytbx.PathElement{
 		{Name: "list"},
@@ -84,7 +64,21 @@ Path in Dot-style would be: %s
 The same path in GoPatch is: %s
 
 `,
-		neatOutput,
+		neatYAML(exampleYAML),
 		examplePath.ToDotStyle(),
 		examplePath.ToGoPatchStyle())
+}
+
+func neatYAML(data string) string {
+	node, err := ytbx.LoadYAMLDocuments([]byte(data))
+	if err != nil {
+		panic(err)
+	}
+
+	output, err := neat.ToYAMLString(node[0])
+	if err != nil {
+		panic(err)
+	}
+
+	return output
 }

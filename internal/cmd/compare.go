@@ -33,15 +33,15 @@ var comparePathsByValue bool
 // compareCmd represents the compare command
 var compareCmd = &cobra.Command{
 	Use:           "compare <from-file> <to-file>",
-	Args:          cobra.RangeArgs(1, 2),
+	Args:          cobra.ExactArgs(2),
 	Short:         "Compare YAML paths",
-	Long:          `Compare YAML paths between two files.`,
+	Long:          `Compare YAML paths between two files and prints all common paths.`,
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		list, err := ytbx.ComparePaths(args[0], args[1], ytbx.GoPatchStyle, comparePathsByValue)
 		if err != nil {
-			return wrap.Error(err, "failed to compare paths of files")
+			return wrap.Errorf(err, "failed to compare paths of files %s and %s", args[0], args[1])
 		}
 
 		for _, entry := range list {
