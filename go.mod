@@ -9,6 +9,6 @@ require (
 	github.com/gonvenience/ytbx v1.2.2
 	github.com/onsi/ginkgo v1.12.0
 	github.com/onsi/gomega v1.9.0
-	github.com/spf13/cobra v0.0.6
+	github.com/spf13/cobra v0.0.7
 	gopkg.in/yaml.v3 v3.0.0-20191120175047-4206685974f2
 )
