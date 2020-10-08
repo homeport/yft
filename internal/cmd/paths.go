@@ -57,7 +57,7 @@ would list you one path: %s
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		list, err := ytbx.ListPaths(args[0], ytbx.GoPatchStyle)
+		list, err := ytbx.ListPaths(args[0])
 		if err != nil {
 			return wrap.Error(err, "failed to get paths from file")
 		}

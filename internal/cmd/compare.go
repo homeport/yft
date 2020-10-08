@@ -39,7 +39,7 @@ var compareCmd = &cobra.Command{
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		list, err := ytbx.ComparePaths(args[0], args[1], ytbx.GoPatchStyle, comparePathsByValue)
+		list, err := ytbx.ComparePaths(args[0], args[1], comparePathsByValue)
 		if err != nil {
 			return wrap.Errorf(err, "failed to compare paths of files %s and %s", args[0], args[1])
 		}
