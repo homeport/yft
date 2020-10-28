@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft)
-[![Build Status](https://travis-ci.org/homeport/yft.svg?branch=main)](https://travis-ci.org/homeport/yft)
+[![Build Status](https://travis-ci.com/homeport/yft.svg?branch=main)](https://travis-ci.com/homeport/yft)
 [![Codecov](https://img.shields.io/codecov/c/github/homeport/yft/main.svg)](https://codecov.io/gh/homeport/yft)
 [![GoDoc](https://godoc.org/github.com/homeport/yft?status.svg)](https://godoc.org/github.com/homeport/yft)
 [![Release](https://img.shields.io/github/release/homeport/yft.svg)](https://github.com/homeport/yft/releases/latest)
