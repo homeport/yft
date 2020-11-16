@@ -78,7 +78,7 @@ var splitCmd = &cobra.Command{
 					return err
 				}
 
-				if err := ioutil.WriteFile(filename, bytes, stat.Mode()); err != nil {
+				if err := ioutil.WriteFile(filename, append([]byte("---\n"), bytes...), stat.Mode()); err != nil {
 					return err
 				}
 			}
