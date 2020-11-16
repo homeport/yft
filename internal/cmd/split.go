@@ -63,6 +63,11 @@ var splitCmd = &cobra.Command{
 			prefix := strings.TrimSuffix(basename, extension)
 
 			for i, document := range inputfile.Documents {
+				// Special case, ignore empty documents
+				if len(document.Content) == 1 && document.Content[0].Tag == "!!null" {
+					continue
+				}
+
 				var filename string = fmt.Sprintf("%s-%d%s", prefix, i, extension)
 				if len(splitCmdSettings.directory) > 0 {
 					filename = filepath.Join(splitCmdSettings.directory, filename)
