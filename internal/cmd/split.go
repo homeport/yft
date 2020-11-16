@@ -32,6 +32,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+var splitCmdSettings struct {
+	directory string
+}
+
 // splitCmd represents the get command
 var splitCmd = &cobra.Command{
 	Use:           "split <file> [<file>] [...]",
@@ -42,6 +46,8 @@ var splitCmd = &cobra.Command{
 	SilenceErrors: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		for _, location := range args {
+			location := filepath.Clean(location)
+
 			stat, err := os.Stat(location)
 			if err != nil {
 				return err
@@ -52,11 +58,15 @@ var splitCmd = &cobra.Command{
 				return err
 			}
 
-			extension := filepath.Ext(location)
-			base := strings.TrimSuffix(location, extension)
+			basename := filepath.Base(location)
+			extension := filepath.Ext(basename)
+			prefix := strings.TrimSuffix(basename, extension)
 
 			for i, document := range inputfile.Documents {
-				filename := fmt.Sprintf("%s-%d%s", base, i, extension)
+				var filename string = fmt.Sprintf("%s-%d%s", prefix, i, extension)
+				if len(splitCmdSettings.directory) > 0 {
+					filename = filepath.Join(splitCmdSettings.directory, filename)
+				}
 
 				bytes, err := yaml.Marshal(document)
 				if err != nil {
@@ -75,4 +85,6 @@ var splitCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(splitCmd)
+
+	splitCmd.PersistentFlags().StringVarP(&splitCmdSettings.directory, "directory", "d", "", "Write files to directory rather than current working directory")
 }
