@@ -68,6 +68,7 @@ github.com/gonvenience/bunt v1.1.3/go.mod h1:hZ898ZprNWgaVlq4s1ivsJu3AY+3wrlJadF
 github.com/gonvenience/bunt v1.1.4 h1:JQopjIzeXvFjWiVp9ku8hqEZfm466Pzqp7nAxwNMreg=
 github.com/gonvenience/bunt v1.1.4/go.mod h1:hZ898ZprNWgaVlq4s1ivsJu3AY+3wrlJadF5Gp7Yq2c=
 github.com/gonvenience/bunt v1.2.0/go.mod h1:hZ898ZprNWgaVlq4s1ivsJu3AY+3wrlJadF5Gp7Yq2c=
+github.com/gonvenience/bunt v1.3.0/go.mod h1:G+d3dJBxxOqV2oca96psgAnPABVC9QptEifjVqPu+mo=
 github.com/gonvenience/neat v1.3.0/go.mod h1:8b38eXyZUqm0e+q6wP/ueDNXM8Frn0Tr2Pd9GQo9FOA=
 github.com/gonvenience/neat v1.3.2/go.mod h1:BS9YqdxIL7HScL1tSF3VBzCtXXOq18xKq3H8l96T+LI=
 github.com/gonvenience/neat v1.3.5 h1:IUbsj/WF1pjAlsI2L1Gn9mY+FaGfmiG6Kp4vmO6r2oQ=
@@ -133,6 +134,7 @@ github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/lucasb-eyer/go-colorful v1.0.2/go.mod h1:0MS4r+7BZKSJ5mw4/S5MPN+qHFF1fYclkSPilDOKW0s=
 github.com/lucasb-eyer/go-colorful v1.0.3 h1:QIbQXiugsb+q10B+MI+7DI1oQLdmnep86tWFlaaUAac=
 github.com/lucasb-eyer/go-colorful v1.0.3/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
+github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/magiconair/properties v1.8.1/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/mattn/go-ciede2000 v0.0.0-20170301095244-782e8c62fec3 h1:BXxTozrOU8zgC5dkpn3J6NTRdoP+hjok/e+ACr4Hibk=
 github.com/mattn/go-ciede2000 v0.0.0-20170301095244-782e8c62fec3/go.mod h1:x1uk6vxTiVuNt6S5R2UYgdhpj3oKojXvOXauHZ7dEnI=
