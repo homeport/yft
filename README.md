@@ -1,11 +1,4 @@
-# /j f t/ - YAML file tool
-
-[![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft)
-[![Build Status](https://travis-ci.com/homeport/yft.svg?branch=main)](https://travis-ci.com/homeport/yft)
-[![Codecov](https://img.shields.io/codecov/c/github/homeport/yft/main.svg)](https://codecov.io/gh/homeport/yft)
-[![GoDoc](https://godoc.org/github.com/homeport/yft?status.svg)](https://godoc.org/github.com/homeport/yft)
-[![Release](https://img.shields.io/github/release/homeport/yft.svg)](https://github.com/homeport/yft/releases/latest)
+# /j f t/ - YAML file tool [![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE) [![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft) [![Build and Tests](https://github.com/homeport/yft/workflows/Build%20and%20Tests/badge.svg)](https://github.com/homeport/yft/actions?query=workflow%3A%22Build+and+Tests%22) [![Codecov](https://img.shields.io/codecov/c/github/homeport/yft/main.svg)](https://codecov.io/gh/homeport/yft) [![Go Reference](https://pkg.go.dev/badge/github.com/homeport/yft.svg)](https://pkg.go.dev/github.com/homeport/yft) [![Release](https://img.shields.io/github/release/homeport/yft.svg)](https://github.com/homeport/yft/releases/latest)
 
 ## Introducing YAML File Tool
 

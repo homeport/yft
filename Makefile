@@ -27,7 +27,7 @@ all: clean verify test build
 
 clean:
 	@GO111MODULE=on go clean -cache $(shell go list ./...)
-	@rm -rf binaries
+	@rm -rf dist
 
 verify:
 	@GO111MODULE=on go mod download
@@ -44,21 +44,3 @@ test: $(sources)
 		-nodes=4 \
 		-compilers=2 \
 		-cover
-
-binaries/yft-linux-amd64: $(sources)
-	@GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
-		-tags netgo \
-		-ldflags='-s -w -extldflags "-static" -X github.com/homeport/yft/internal/cmd.version=$(version)' \
-		-o binaries/yft-linux-amd64 \
-		cmd/yft/main.go
-
-binaries/yft-darwin-amd64: $(sources)
-	@GO111MODULE=on CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build \
-		-tags netgo \
-		-ldflags='-s -w -extldflags "-static" -X github.com/homeport/yft/internal/cmd.version=$(version)' \
-		-o binaries/yft-darwin-amd64 \
-		cmd/yft/main.go
-
-build: binaries/yft-linux-amd64 binaries/yft-darwin-amd64
-	@/bin/sh -c "echo '\n\033[1mSHA sum of compiled binaries:\033[0m'"
-	@shasum -a256 binaries/yft-linux-amd64 binaries/yft-darwin-amd64

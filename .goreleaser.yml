@@ -1,0 +1,57 @@
+---
+builds:
+  - env:
+    - CGO_ENABLED=0
+    goos:
+    - linux
+    - darwin
+    goarch:
+    - amd64
+    main: ./cmd/yft/main.go
+    flags:
+    - -tags
+    - netgo
+    - -trimpath
+    ldflags:
+    - -s -w -extldflags "-static" -X github.com/homeport/yft/internal/cmd.version={{.Version}}
+    mod_timestamp: '{{ .CommitTimestamp }}'
+
+archives:
+- replacements:
+    darwin: darwin
+    linux: linux
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+release:
+  name_template: "{{.ProjectName}} release v{{.Version}}"
+
+changelog:
+  skip: false
+  sort: ""
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+
+brews:
+  - tap:
+      owner: homeport
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    url_template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    download_strategy: CurlDownloadStrategy
+    commit_author:
+      name: GoReleaser Bot
+      email: goreleaser@carlosbecker.com
+    folder: HomebrewFormula
+    homepage: "https://github.com/homeport/yft"
+    description: "yft - YAML file tool"
+    license: "MIT"
+    skip_upload: false
+    test: |
+      system "#{bin}/yft version"
