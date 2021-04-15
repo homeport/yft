@@ -23,10 +23,15 @@ package cmd
 import (
 	"fmt"
 
+	_ "embed"
+
 	"github.com/gonvenience/neat"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
 )
+
+//go:embed usage-template.txt
+var usageTemplate string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -38,6 +43,16 @@ var rootCmd = &cobra.Command{
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() error {
+	rootCmd.SetUsageTemplate(usageTemplate)
+	cobra.AddTemplateFunc("cmdGroups", func() map[string][]*cobra.Command {
+		return map[string][]*cobra.Command{
+			"CRUD":           {getCmd},
+			"Convenience":    {restructureCmd, pathsCmd},
+			"Multi document": {splitCmd, joinCmd},
+			"Miscellaneous":  {compareCmd, versionCmd},
+		}
+	})
+
 	return rootCmd.Execute()
 }
 
