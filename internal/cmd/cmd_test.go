@@ -60,7 +60,7 @@ var _ = Describe("program sub-commands", func() {
 			Expect(output).To(BeEquivalentTo(`---
 releases:
 - name: binary-buildpack
-  url: https://bosh.io/d/github.com/cloudfoundry/binary-buildpack-release?v=1.0.32
+  url: "https://bosh.io/d/github.com/cloudfoundry/binary-buildpack-release?v=1.0.32"
   version: 1.0.32
   sha1: 5ab3b7e685ca18a47d0b4a16d0e3b60832b0a393`))
 		})
