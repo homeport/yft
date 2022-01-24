@@ -3,7 +3,7 @@ module github.com/homeport/yft
 go 1.17
 
 require (
-	github.com/gonvenience/bunt v1.3.2
+	github.com/gonvenience/bunt v1.3.3
 	github.com/gonvenience/neat v1.3.7
 	github.com/gonvenience/wrap v1.1.1
 	github.com/gonvenience/ytbx v1.4.2
