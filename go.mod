@@ -6,7 +6,7 @@ require (
 	github.com/gonvenience/bunt v1.3.3
 	github.com/gonvenience/neat v1.3.9
 	github.com/gonvenience/wrap v1.1.1
-	github.com/gonvenience/ytbx v1.4.2
+	github.com/gonvenience/ytbx v1.4.4
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.18.1
 	github.com/spf13/cobra v1.4.0
@@ -14,10 +14,10 @@ require (
 )
 
 require (
-	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/BurntSushi/toml v1.0.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/gonvenience/term v1.0.2 // indirect
-	github.com/gonvenience/text v1.0.6 // indirect
+	github.com/gonvenience/text v1.0.7 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-ciede2000 v0.0.0-20170301095244-782e8c62fec3 // indirect
