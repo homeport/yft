@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/gonvenience/bunt v1.3.4
-	github.com/gonvenience/neat v1.3.10
+	github.com/gonvenience/neat v1.3.11
 	github.com/gonvenience/wrap v1.1.2
 	github.com/gonvenience/ytbx v1.4.4
 	github.com/onsi/ginkgo v1.16.5
