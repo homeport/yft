@@ -24,7 +24,6 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/gonvenience/bunt"
@@ -51,7 +50,7 @@ releases:
 `
 
 		var data yamlv3.Node
-		yamlv3.Unmarshal([]byte(exampleYAML), &data)
+		_ = yamlv3.Unmarshal([]byte(exampleYAML), &data)
 
 		before, _ := neat.ToYAMLString(data)
 		ytbx.RestructureObject(&data)
@@ -101,7 +100,10 @@ Result:
 			}
 
 			writer.Flush()
-			ioutil.WriteFile(location, buf.Bytes(), info.Mode())
+			err = os.WriteFile(location, buf.Bytes(), info.Mode())
+			if err != nil {
+				return err
+			}
 
 		} else {
 			for _, document := range input.Documents {

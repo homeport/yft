@@ -21,10 +21,9 @@
 package cmd_test
 
 import (
-	"io/ioutil"
 	"os"
 
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
@@ -73,7 +72,7 @@ releases:
   version: 1.0.32
   url: https://bosh.io/d/github.com/cloudfoundry/binary-buildpack-release?v=1.0.32
 `)
-			tmpfile, err := ioutil.TempFile("", "exampleYAML")
+			tmpfile, err := os.CreateTemp("", "exampleYAML")
 			Expect(err).ToNot(HaveOccurred())
 			defer os.Remove(tmpfile.Name())
 
@@ -87,7 +86,7 @@ releases:
 			Expect(err).ToNot(HaveOccurred())
 			Expect(output).To(BeEmpty())
 
-			actualBytes, err := ioutil.ReadFile(tmpfile.Name())
+			actualBytes, err := os.ReadFile(tmpfile.Name())
 			Expect(err).ToNot(HaveOccurred())
 
 			Expect(string(actualBytes)).To(BeEquivalentTo(`releases:

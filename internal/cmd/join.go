@@ -23,7 +23,6 @@ package cmd
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -76,7 +75,7 @@ var joinCmd = &cobra.Command{
 			fmt.Print(buf.String())
 
 		default:
-			return ioutil.WriteFile(joinCmdSettings.filename, buf.Bytes(), os.FileMode(0644))
+			return os.WriteFile(joinCmdSettings.filename, buf.Bytes(), os.FileMode(0644))
 		}
 
 		return nil
