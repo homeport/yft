@@ -1,4 +1,11 @@
-# ytf [![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE) [![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft) [![Build and Tests](https://github.com/homeport/yft/workflows/Build%20and%20Tests/badge.svg)](https://github.com/homeport/yft/actions?query=workflow%3A%22Build+and+Tests%22) [![Codecov](https://img.shields.io/codecov/c/github/homeport/yft/main.svg)](https://codecov.io/gh/homeport/yft) [![Go Reference](https://pkg.go.dev/badge/github.com/homeport/yft.svg)](https://pkg.go.dev/github.com/homeport/yft) [![Release](https://img.shields.io/github/release/homeport/yft.svg)](https://github.com/homeport/yft/releases/latest)
+# ytf
+
+[![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft)
+[![Tests](https://github.com/homeport/yft/workflows/Tests/badge.svg)](https://github.com/homeport/yft/actions?query=workflow%3A%22Tests%22)
+[![Codecov](https://img.shields.io/codecov/c/github/homeport/yft/main.svg)](https://codecov.io/gh/homeport/yft)
+[![Go Reference](https://pkg.go.dev/badge/github.com/homeport/yft.svg)](https://pkg.go.dev/github.com/homeport/yft)
+[![Release](https://img.shields.io/github/release/homeport/yft.svg)](https://github.com/homeport/yft/releases/latest)
 
 ## Introducing YAML File Tool
 
@@ -71,7 +78,7 @@ There are different ways to get `yft`. You are free to pick the one that makes t
 
 We are happy to have other people contributing to the project. If you decide to do that, here's how to:
 
-- get Go (`yft` requires Go version 1.17 or greater)
+- get Go (`yft` requires Go version 1.19 or greater)
 - fork the project
 - create a new branch
 - make your changes
@@ -107,7 +114,7 @@ docker run \
   --rm \
   --volume $GOPATH/src/github.com/homeport/yft:/go/src/github.com/homeport/yft \
   --workdir /go/src/github.com/homeport/yft \
-  golang:1.17 /bin/bash
+  golang:1.19 /bin/bash
 ```
 
 ## License

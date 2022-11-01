@@ -22,7 +22,6 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -78,7 +77,7 @@ var splitCmd = &cobra.Command{
 					return err
 				}
 
-				if err := ioutil.WriteFile(filename, append([]byte("---\n"), bytes...), stat.Mode()); err != nil {
+				if err := os.WriteFile(filename, append([]byte("---\n"), bytes...), stat.Mode()); err != nil {
 					return err
 				}
 			}

@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-.PHONY: all clean test verify build
+.PHONY: all clean test verify
 
 version := $(shell git describe --tags --abbrev=0 2>/dev/null || (git rev-parse HEAD | cut -c-8))
 sources := $(wildcard cmd/yft/*.go internal/cmd/*.go)
@@ -26,21 +26,22 @@ sources := $(wildcard cmd/yft/*.go internal/cmd/*.go)
 all: clean verify test build
 
 clean:
-	@GO111MODULE=on go clean -cache $(shell go list ./...)
+	@go clean -cache $(shell go list ./...)
 	@rm -rf dist
 
 verify:
-	@GO111MODULE=on go mod download
-	@GO111MODULE=on go mod verify
+	@go mod download
+	@go mod verify
 
 test: $(sources)
-	@GO111MODULE=on ginkgo \
-		-r \
-		-randomizeAllSpecs \
-		-randomizeSuites \
-		-failOnPending \
-		-trace \
-		-race \
-		-nodes=4 \
-		-compilers=2 \
-		-cover
+	@go run github.com/onsi/ginkgo/v2/ginkgo \
+	  --coverprofile=unit.coverprofile \
+	  --randomize-all \
+	  --randomize-suites \
+	  --fail-on-pending \
+	  --keep-going \
+	  --slow-spec-threshold=4m \
+	  --compilers=2 \
+	  --race \
+	  --trace \
+	  ./...

@@ -29,7 +29,7 @@ import (
 	"testing"
 
 	. "github.com/homeport/yft/internal/cmd"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
@@ -57,7 +57,8 @@ func yft(args ...string) (out string, err error) {
 	w.Close()
 
 	var buf bytes.Buffer
-	io.Copy(&buf, r)
+	_, copyErr := io.Copy(&buf, r)
+	Expect(copyErr).ToNot(HaveOccurred())
 
 	return strings.TrimRight(buf.String(), "\n"), err
 }
