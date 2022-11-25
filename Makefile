@@ -1,4 +1,4 @@
-# Copyright © 2018 The Homeport Team
+# Copyright © 2022 The Homeport Team
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,30 +18,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-.PHONY: all clean test verify
-
 version := $(shell git describe --tags --abbrev=0 2>/dev/null || (git rev-parse HEAD | cut -c-8))
 sources := $(wildcard cmd/yft/*.go internal/cmd/*.go)
 
-all: clean verify test build
+.PHONY: all
+all: clean test
 
+.PHONY: clean
 clean:
 	@go clean -cache $(shell go list ./...)
 	@rm -rf dist
 
-verify:
-	@go mod download
-	@go mod verify
-
+.PHONY: test
 test: $(sources)
-	@go run github.com/onsi/ginkgo/v2/ginkgo \
+	@ginkgo run \
 	  --coverprofile=unit.coverprofile \
 	  --randomize-all \
 	  --randomize-suites \
 	  --fail-on-pending \
 	  --keep-going \
-	  --slow-spec-threshold=4m \
 	  --compilers=2 \
 	  --race \
 	  --trace \
+	  --flake-attempts=3 \
 	  ./...
