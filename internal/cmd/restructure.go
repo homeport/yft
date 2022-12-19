@@ -33,7 +33,9 @@ import (
 	yamlv3 "gopkg.in/yaml.v3"
 )
 
-var inplace bool
+var restructureCmdSettings struct {
+	inplace bool
+}
 
 // restructureCmd represents the paths command
 var restructureCmd = &cobra.Command{
@@ -58,7 +60,7 @@ releases:
 
 		return bunt.Sprintf(`Restructure the order of keys in YAML maps.
 
-The restucture logic tries to put human friendly and identifying keys such as
+The restructure logic tries to put human friendly and identifying keys such as
 the name, or id key before other entries.
 
 Example:
@@ -70,7 +72,7 @@ Result:
 	}(),
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(_ *cobra.Command, args []string) error {
 		location := args[0]
 
 		input, err := ytbx.LoadFile(location)
@@ -82,7 +84,7 @@ Result:
 			ytbx.RestructureObject(input.Documents[i])
 		}
 
-		if inplace {
+		if restructureCmdSettings.inplace {
 			info, err := os.Stat(location)
 			if err != nil {
 				return err
@@ -91,9 +93,9 @@ Result:
 			var buf bytes.Buffer
 			writer := bufio.NewWriter(&buf)
 			for _, document := range input.Documents {
-				out, err := yamlv3.Marshal(document)
-				if err != nil {
-					return err
+				out, marshalErr := yamlv3.Marshal(document)
+				if marshalErr != nil {
+					return marshalErr
 				}
 
 				fmt.Fprint(writer, string(out))
@@ -123,10 +125,7 @@ Result:
 
 func init() {
 	rootCmd.AddCommand(restructureCmd)
-
 	restructureCmd.Flags().SortFlags = false
-	restructureCmd.PersistentFlags().SortFlags = false
-
-	restructureCmd.PersistentFlags().BoolVarP(&inplace, "in-place", "i", false, "overwrite input file with output of this command")
-	restructureCmd.PersistentFlags().BoolVarP(&ytbx.DisableRemainingKeySort, "disable-remaining-key-sort", "s", false, "disables that all unknown keys are sorted to improve the readability")
+	restructureCmd.Flags().BoolVarP(&restructureCmdSettings.inplace, "in-place", "i", false, "overwrite input file with output of this command")
+	restructureCmd.Flags().BoolVarP(&ytbx.DisableRemainingKeySort, "disable-remaining-key-sort", "s", false, "disables that all unknown keys are sorted to improve the readability")
 }

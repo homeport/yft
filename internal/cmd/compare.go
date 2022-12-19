@@ -38,7 +38,7 @@ var compareCmd = &cobra.Command{
 	Long:          `Compare YAML paths between two files and prints all common paths.`,
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(_ *cobra.Command, args []string) error {
 		list, err := ytbx.ComparePaths(args[0], args[1], comparePathsByValue)
 		if err != nil {
 			return wrap.Errorf(err, "failed to compare paths of files %s and %s", args[0], args[1])
@@ -54,5 +54,6 @@ var compareCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(compareCmd)
-	compareCmd.PersistentFlags().BoolVar(&comparePathsByValue, "by-value", false, "compare only paths with same value")
+	compareCmd.Flags().SortFlags = false
+	compareCmd.Flags().BoolVar(&comparePathsByValue, "by-value", false, "compare only paths with same value")
 }

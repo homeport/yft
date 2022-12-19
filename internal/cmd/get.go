@@ -37,7 +37,7 @@ var getCmd = &cobra.Command{
 	Long:          "Get the value at a given path in the file.\n" + getPathHelp(),
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(_ *cobra.Command, args []string) error {
 		location := args[0]
 		pathString := args[1]
 

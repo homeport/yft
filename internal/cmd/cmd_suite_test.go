@@ -28,9 +28,10 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/homeport/yft/internal/cmd"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+
+	"github.com/homeport/yft/internal/cmd"
 )
 
 func TestCmd(t *testing.T) {
@@ -53,7 +54,8 @@ func yft(args ...string) (out string, err error) {
 
 	os.Stdout = w
 	os.Args = append([]string{"yft"}, args...)
-	err = Execute()
+	cmd.Reset()
+	err = cmd.Execute()
 	w.Close()
 
 	var buf bytes.Buffer

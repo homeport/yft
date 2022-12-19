@@ -33,7 +33,7 @@ var versionCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(0),
 	Short: "Display version",
 	Long:  "Displays the version of this tool",
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		if len(version) == 0 {
 			version = "development"
 		}

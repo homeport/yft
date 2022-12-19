@@ -40,6 +40,11 @@ var rootCmd = &cobra.Command{
 	Long:  `YAML file tool provides a set of commands to work with the content of a given YAML file`,
 }
 
+// Reset function is only used for testing
+func Reset() {
+	restructureCmdSettings.inplace = false
+}
+
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() error {

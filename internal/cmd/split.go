@@ -43,9 +43,9 @@ var splitCmd = &cobra.Command{
 	Long:          "Splits a multi-document file into separate files.\n",
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	RunE: func(cmd *cobra.Command, args []string) error {
-		for _, location := range args {
-			location := filepath.Clean(location)
+	RunE: func(_ *cobra.Command, args []string) error {
+		for _, arg := range args {
+			location := filepath.Clean(arg)
 
 			stat, err := os.Stat(location)
 			if err != nil {
@@ -89,6 +89,6 @@ var splitCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(splitCmd)
-
-	splitCmd.PersistentFlags().StringVarP(&splitCmdSettings.directory, "directory", "d", "", "Write files to directory rather than current working directory")
+	splitCmd.Flags().SortFlags = false
+	splitCmd.Flags().StringVarP(&splitCmdSettings.directory, "directory", "d", "", "Write files to directory rather than current working directory")
 }
