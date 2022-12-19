@@ -44,11 +44,11 @@ var joinCmd = &cobra.Command{
 	Long:          "Joins multiple YAML files into a multi-document file.\n",
 	SilenceUsage:  true,
 	SilenceErrors: true,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	RunE: func(_ *cobra.Command, args []string) error {
 		var buf bytes.Buffer
 
-		for _, location := range args {
-			location := filepath.Clean(location)
+		for _, arg := range args {
+			location := filepath.Clean(arg)
 
 			inputfile, err := ytbx.LoadFile(location)
 			if err != nil {
@@ -84,7 +84,7 @@ var joinCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(joinCmd)
-
-	joinCmd.PersistentFlags().StringVarP(&joinCmdSettings.filename, "name", "f", "", "Name of the target file")
-	joinCmd.PersistentFlags().BoolVarP(&joinCmdSettings.ending, "document-ending", "e", false, "Write YAML document ending ('...') after each document")
+	joinCmd.Flags().SortFlags = false
+	joinCmd.Flags().StringVarP(&joinCmdSettings.filename, "name", "f", "", "Name of the target file")
+	joinCmd.Flags().BoolVarP(&joinCmdSettings.ending, "document-ending", "e", false, "Write YAML document ending ('...') after each document")
 }
