@@ -7,7 +7,7 @@ require (
 	github.com/gonvenience/neat v1.3.11
 	github.com/gonvenience/wrap v1.1.2
 	github.com/gonvenience/ytbx v1.4.4
-	github.com/onsi/ginkgo/v2 v2.7.0
+	github.com/onsi/ginkgo/v2 v2.7.1
 	github.com/onsi/gomega v1.26.0
 	github.com/spf13/cobra v1.6.1
 	gopkg.in/yaml.v3 v3.0.1
