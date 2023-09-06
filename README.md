@@ -78,7 +78,7 @@ There are different ways to get `yft`. You are free to pick the one that makes t
 
 We are happy to have other people contributing to the project. If you decide to do that, here's how to:
 
-- get Go (`yft` requires Go version 1.19 or greater)
+- get Go (`yft` requires Go version 1.20 or greater)
 - fork the project
 - create a new branch
 - make your changes
@@ -114,7 +114,7 @@ docker run \
   --rm \
   --volume $GOPATH/src/github.com/homeport/yft:/go/src/github.com/homeport/yft \
   --workdir /go/src/github.com/homeport/yft \
-  golang:1.19 /bin/bash
+  golang:1.20 /bin/bash
 ```
 
 ## License
