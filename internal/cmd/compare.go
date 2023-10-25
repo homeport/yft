@@ -23,7 +23,6 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/gonvenience/wrap"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
 )
@@ -41,7 +40,7 @@ var compareCmd = &cobra.Command{
 	RunE: func(_ *cobra.Command, args []string) error {
 		list, err := ytbx.ComparePaths(args[0], args[1], comparePathsByValue)
 		if err != nil {
-			return wrap.Errorf(err, "failed to compare paths of files %s and %s", args[0], args[1])
+			return fmt.Errorf("failed to compare paths of files %s and %s: %w", args[0], args[1], err)
 		}
 
 		for _, entry := range list {

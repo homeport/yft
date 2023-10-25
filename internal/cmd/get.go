@@ -24,7 +24,6 @@ import (
 	"fmt"
 
 	"github.com/gonvenience/neat"
-	"github.com/gonvenience/wrap"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
 )
@@ -57,7 +56,7 @@ var getCmd = &cobra.Command{
 
 		output, err := outputProcessor.ToYAML(obj)
 		if err != nil {
-			return wrap.Error(err, "failed to render gathered data")
+			return fmt.Errorf("failed to render gathered data: %w", err)
 		}
 
 		fmt.Print(output)

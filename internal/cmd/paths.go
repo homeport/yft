@@ -24,7 +24,6 @@ import (
 	"fmt"
 
 	"github.com/gonvenience/bunt"
-	"github.com/gonvenience/wrap"
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
 )
@@ -59,7 +58,7 @@ would list you one path: %s
 	RunE: func(_ *cobra.Command, args []string) error {
 		list, err := ytbx.ListPaths(args[0])
 		if err != nil {
-			return wrap.Error(err, "failed to get paths from file")
+			return fmt.Errorf("failed to get paths from file: %w", err)
 		}
 
 		for _, entry := range list {
