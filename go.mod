@@ -8,7 +8,7 @@ require (
 	github.com/gonvenience/wrap v1.2.0
 	github.com/gonvenience/ytbx v1.4.4
 	github.com/onsi/ginkgo/v2 v2.13.0
-	github.com/onsi/gomega v1.29.0
+	github.com/onsi/gomega v1.30.0
 	github.com/spf13/cobra v1.8.0
 	gopkg.in/yaml.v3 v3.0.1
 )
