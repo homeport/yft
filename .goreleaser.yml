@@ -1,19 +1,19 @@
 ---
 builds:
-  - env:
-    - CGO_ENABLED=0
-    goos:
-    - linux
-    - darwin
-    goarch:
-    - arm64
-    - amd64
-    main: ./cmd/yft/main.go
-    flags:
-    - -trimpath
-    ldflags:
-    - -s -w -extldflags "-static" -X github.com/homeport/yft/internal/cmd.version={{.Version}}
-    mod_timestamp: '{{ .CommitTimestamp }}'
+- env:
+  - CGO_ENABLED=0
+  goos:
+  - linux
+  - darwin
+  goarch:
+  - arm64
+  - amd64
+  main: ./cmd/yft/main.go
+  flags:
+  - -trimpath
+  ldflags:
+  - -s -w -extldflags "-static" -X github.com/homeport/yft/internal/cmd.version={{.Version}}
+  mod_timestamp: '{{ .CommitTimestamp }}'
 
 checksum:
   name_template: 'checksums.txt'
@@ -25,7 +25,7 @@ release:
   name_template: "{{.ProjectName}} release v{{.Version}}"
 
 changelog:
-  skip: false
+  disable: true
   sort: ""
   filters:
     exclude:
@@ -33,19 +33,19 @@ changelog:
     - '^test:'
 
 brews:
-  - tap:
-      owner: homeport
-      name: homebrew-tap
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    url_template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-    download_strategy: CurlDownloadStrategy
-    commit_author:
-      name: GoReleaser Bot
-      email: goreleaser@carlosbecker.com
-    directory: HomebrewFormula
-    homepage: "https://github.com/homeport/yft"
-    description: "yft - YAML file tool"
-    license: "MIT"
-    skip_upload: false
-    test: |
-      system "#{bin}/yft version"
+- repository:
+    owner: homeport
+    name: homebrew-tap
+    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+  url_template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+  download_strategy: CurlDownloadStrategy
+  commit_author:
+    name: GoReleaser Bot
+    email: goreleaser@carlosbecker.com
+  directory: HomebrewFormula
+  homepage: "https://github.com/homeport/dyff"
+  description: "yft - YAML file tool"
+  license: "MIT"
+  skip_upload: false
+  test: |
+    system "#{bin}/yft version"
