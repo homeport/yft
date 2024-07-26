@@ -18,7 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-version := $(shell git describe --tags --abbrev=0 2>/dev/null || (git rev-parse HEAD | cut -c-8))
 sources := $(wildcard cmd/yft/*.go internal/cmd/*.go)
 
 .PHONY: all
@@ -26,12 +25,12 @@ all: clean test
 
 .PHONY: clean
 clean:
-	@go clean -cache $(shell go list ./...)
-	@rm -rf dist
+	@rm -rf dist unit.coverprofile
+	@go clean -i -cache
 
 .PHONY: test
 test: $(sources)
-	@ginkgo run \
+	@go run -mod=mod github.com/onsi/ginkgo/v2/ginkgo run \
 	  --coverprofile=unit.coverprofile \
 	  --randomize-all \
 	  --randomize-suites \
