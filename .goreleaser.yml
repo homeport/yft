@@ -8,8 +8,8 @@ builds:
   - linux
   - darwin
   goarch:
-  - arm64
   - amd64
+  - arm64
   main: ./cmd/yft/main.go
   flags:
   - -trimpath
@@ -27,12 +27,12 @@ release:
   name_template: "{{.ProjectName}} release v{{.Version}}"
 
 changelog:
-  disable: true
-  sort: ""
+  disable: false
+  use: github
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+    - "Merge pull request"
+    - "dependabot"
 
 brews:
 - repository:
