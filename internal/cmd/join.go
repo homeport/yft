@@ -28,7 +28,7 @@ import (
 
 	"github.com/gonvenience/ytbx"
 	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
+	"go.yaml.in/yaml/v3"
 )
 
 var joinCmdSettings struct {
