@@ -45,6 +45,10 @@ var getCmd = &cobra.Command{
 			return err
 		}
 
+		if len(inputfile.Documents) == 0 {
+			return fmt.Errorf("file %s contains no documents", location)
+		}
+
 		obj, err := ytbx.Grab(inputfile.Documents[0], pathString)
 		if err != nil {
 			return err

@@ -43,6 +43,11 @@ var rootCmd = &cobra.Command{
 // Reset function is only used for testing
 func Reset() {
 	restructureCmdSettings.inplace = false
+	splitCmdSettings.directory = ""
+	joinCmdSettings.filename = ""
+	joinCmdSettings.ending = false
+	comparePathsByValue = false
+	ytbx.DisableRemainingKeySort = false
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
