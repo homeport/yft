@@ -44,6 +44,7 @@ var rootCmd = &cobra.Command{
 func Reset() {
 	restructureCmdSettings.inplace = false
 	splitCmdSettings.directory = ""
+	splitCmdSettings.documentMarker = false
 	joinCmdSettings.filename = ""
 	joinCmdSettings.ending = false
 	comparePathsByValue = false
