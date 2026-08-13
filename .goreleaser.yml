@@ -45,6 +45,6 @@ homebrew_casks:
   commit_author:
     name: GoReleaser Bot
     email: goreleaser@carlosbecker.com
-  directory: HomebrewFormula
+  directory: Casks
   homepage: "https://github.com/homeport/dyff"
   description: "yft - YAML file tool"
