@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/gonvenience/ytbx"
@@ -61,13 +62,18 @@ var splitCmd = &cobra.Command{
 			extension := filepath.Ext(basename)
 			prefix := strings.TrimSuffix(basename, extension)
 
+			padding := len(strconv.Itoa(len(inputfile.Documents) - 1))
+			if padding < 2 {
+				padding = 2
+			}
+
 			for i, document := range inputfile.Documents {
 				// Special case, ignore empty documents
 				if len(document.Content) == 1 && document.Content[0].Tag == "!!null" {
 					continue
 				}
 
-				var filename string = fmt.Sprintf("%s-%d%s", prefix, i, extension)
+				filename := fmt.Sprintf("%s-%0*d%s", prefix, padding, i, extension)
 				if len(splitCmdSettings.directory) > 0 {
 					filename = filepath.Join(splitCmdSettings.directory, filename)
 				}
