@@ -45,5 +45,5 @@ homebrew_casks:
     name: GoReleaser Bot
     email: goreleaser@carlosbecker.com
   directory: Casks
-  homepage: "https://github.com/homeport/dyff"
+  homepage: "https://github.com/homeport/yft"
   description: "yft - YAML file tool"

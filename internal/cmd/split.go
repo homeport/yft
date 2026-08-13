@@ -45,6 +45,12 @@ var splitCmd = &cobra.Command{
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(_ *cobra.Command, args []string) error {
+		if len(splitCmdSettings.directory) > 0 {
+			if info, err := os.Stat(splitCmdSettings.directory); err != nil || !info.IsDir() {
+				return fmt.Errorf("output directory %q does not exist or is not a directory", splitCmdSettings.directory)
+			}
+		}
+
 		for _, arg := range args {
 			location := filepath.Clean(arg)
 

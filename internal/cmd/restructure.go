@@ -98,10 +98,15 @@ Result:
 					return marshalErr
 				}
 
-				fmt.Fprint(writer, string(out))
+				if _, err := writer.Write(out); err != nil {
+					return err
+				}
 			}
 
-			writer.Flush()
+			if err = writer.Flush(); err != nil {
+				return err
+			}
+
 			err = os.WriteFile(location, buf.Bytes(), info.Mode())
 			if err != nil {
 				return err
