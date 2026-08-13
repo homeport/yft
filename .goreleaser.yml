@@ -34,20 +34,17 @@ changelog:
     - "Merge pull request"
     - "dependabot"
 
-brews:
+homebrew_casks:
 - repository:
     owner: homeport
     name: homebrew-tap
     token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-  url_template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-  download_strategy: CurlDownloadStrategy
+  url:
+    template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    using: ":homebrew_curl"
   commit_author:
     name: GoReleaser Bot
     email: goreleaser@carlosbecker.com
   directory: HomebrewFormula
   homepage: "https://github.com/homeport/dyff"
   description: "yft - YAML file tool"
-  license: "MIT"
-  skip_upload: false
-  test: |
-    system "#{bin}/yft version"
