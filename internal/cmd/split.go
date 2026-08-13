@@ -35,7 +35,7 @@ var splitCmdSettings struct {
 	directory string
 }
 
-// splitCmd represents the get command
+// splitCmd represents the split command
 var splitCmd = &cobra.Command{
 	Use:           "split <file> [<file>] [...]",
 	Aliases:       []string{"unravel", "break-down", "segment"},

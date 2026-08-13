@@ -47,7 +47,7 @@ yaml:
 Example:
 %s
 
-would list you one path: %s
+would list one path: %s
 `,
 			neatYAML(exampleYAML),
 			examplePath,
