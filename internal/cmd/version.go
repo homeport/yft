@@ -27,7 +27,7 @@ import (
 
 var version string
 
-// versionCmd represents the get command
+// versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Args:  cobra.ExactArgs(0),

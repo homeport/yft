@@ -1,4 +1,4 @@
-# ytf
+# yft
 
 [![License](https://img.shields.io/github/license/homeport/yft.svg)](https://github.com/homeport/yft/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/homeport/yft)](https://goreportcard.com/report/github.com/homeport/yft)

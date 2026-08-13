@@ -37,7 +37,7 @@ var restructureCmdSettings struct {
 	inplace bool
 }
 
-// restructureCmd represents the paths command
+// restructureCmd represents the restructure command
 var restructureCmd = &cobra.Command{
 	Use:   "restructure <file>",
 	Args:  cobra.ExactArgs(1),

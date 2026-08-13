@@ -34,7 +34,7 @@ var compareCmd = &cobra.Command{
 	Use:           "compare <from-file> <to-file>",
 	Args:          cobra.ExactArgs(2),
 	Short:         "Compare YAML paths",
-	Long:          `Compare YAML paths between two files and prints all common paths.`,
+	Long:          `Compares YAML paths between two files and prints all common paths.`,
 	SilenceUsage:  true,
 	SilenceErrors: true,
 	RunE: func(_ *cobra.Command, args []string) error {

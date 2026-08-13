@@ -36,7 +36,7 @@ var joinCmdSettings struct {
 	ending   bool
 }
 
-// joinCmd represents the get command
+// joinCmd represents the join command
 var joinCmd = &cobra.Command{
 	Use:           "join <file> [<file>] [...]",
 	Aliases:       []string{"combine"},
