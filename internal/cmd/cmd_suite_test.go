@@ -34,6 +34,12 @@ import (
 	"github.com/homeport/yft/internal/cmd"
 )
 
+// indexOfSubstring returns the byte offset of the first occurrence of sub in s,
+// or -1 if not present. Used for ordering assertions in tests.
+func indexOfSubstring(s, sub string) int {
+	return strings.Index(s, sub)
+}
+
 func TestCmd(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "YAML File Tool command line tests")
