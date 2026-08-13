@@ -41,7 +41,6 @@ homebrew_casks:
     token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
   url:
     template: "https://github.com/homeport/yft/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-    using: ":homebrew_curl"
   commit_author:
     name: GoReleaser Bot
     email: goreleaser@carlosbecker.com
