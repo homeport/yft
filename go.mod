@@ -7,7 +7,7 @@ require (
 	github.com/gonvenience/neat v1.3.20
 	github.com/gonvenience/ytbx v1.5.0
 	github.com/onsi/ginkgo/v2 v2.32.1
-	github.com/onsi/gomega v1.42.1
+	github.com/onsi/gomega v1.43.0
 	github.com/spf13/cobra v1.10.2
 	go.yaml.in/yaml/v3 v3.0.5
 )
