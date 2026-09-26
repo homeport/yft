@@ -111,7 +111,7 @@ releases:
 			Expect(err).ToNot(HaveOccurred())
 
 			// With 15 documents, indices 0–14 need 2 digits: multi-doc-00.yml … multi-doc-14.yml
-			for i := 0; i < 15; i++ {
+			for i := range 15 {
 				expected := filepath.Join(tmpDir, fmt.Sprintf("multi-doc-%02d.yml", i))
 				Expect(expected).To(BeAnExistingFile(),
 					"expected zero-padded split file %s to exist", expected)
@@ -119,7 +119,7 @@ releases:
 
 			// The unpadded single-digit names must NOT exist (for indices < 10,
 			// "%d" and "%02d" differ, so the unpadded file should never be created)
-			for i := 0; i < 10; i++ {
+			for i := range 10 {
 				unexpected := filepath.Join(tmpDir, fmt.Sprintf("multi-doc-%d.yml", i))
 				Expect(unexpected).NotTo(BeAnExistingFile(),
 					"unpadded split file %s must not exist", unexpected)
@@ -152,16 +152,46 @@ releases:
 			Expect(err).ToNot(HaveOccurred())
 
 			// Verify documents appear in ascending index order (1 through 15)
-			for i := 1; i <= 15; i++ {
-				Expect(output).To(ContainSubstring(fmt.Sprintf("index: %d", i)))
+			for i := range 15 {
+				Expect(output).To(ContainSubstring(fmt.Sprintf("index: %d", i+1)))
 			}
 
 			// Verify document i appears before document i+1 in the output
-			for i := 1; i < 15; i++ {
-				posA := indexOfSubstring(output, fmt.Sprintf("index: %d\n", i))
-				posB := indexOfSubstring(output, fmt.Sprintf("index: %d\n", i+1))
+			for i := range 14 {
+				posA := indexOfSubstring(output, fmt.Sprintf("index: %d\n", i+1))
+				posB := indexOfSubstring(output, fmt.Sprintf("index: %d\n", i+2))
 				Expect(posA).To(BeNumerically("<", posB),
-					"document %d should appear before document %d in joined output", i, i+1)
+					"document %d should appear before document %d in joined output", i+1, i+2)
+			}
+		})
+
+		It("should not include a document start marker (---) by default", func() {
+			tmpDir, err := os.MkdirTemp("", "yft-split-no-marker-*")
+			Expect(err).ToNot(HaveOccurred())
+			defer func() { _ = os.RemoveAll(tmpDir) }()
+
+			_, err = yft("split", "--directory", tmpDir, asset("examples", "multi-doc.yml"))
+			Expect(err).ToNot(HaveOccurred())
+
+			content, err := os.ReadFile(filepath.Join(tmpDir, "multi-doc-00.yml"))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(string(content)).NotTo(HavePrefix("---\n"),
+				"split output must not start with a document marker when --document-marker is not set")
+		})
+
+		It("should include a document start marker (---) when --document-marker flag is set", func() {
+			tmpDir, err := os.MkdirTemp("", "yft-split-with-marker-*")
+			Expect(err).ToNot(HaveOccurred())
+			defer func() { _ = os.RemoveAll(tmpDir) }()
+
+			_, err = yft("split", "--document-marker", "--directory", tmpDir, asset("examples", "multi-doc.yml"))
+			Expect(err).ToNot(HaveOccurred())
+
+			for i := range 15 {
+				content, err := os.ReadFile(filepath.Join(tmpDir, fmt.Sprintf("multi-doc-%02d.yml", i)))
+				Expect(err).ToNot(HaveOccurred())
+				Expect(string(content)).To(HavePrefix("---\n"),
+					"split output file %02d must start with a document marker when --document-marker is set", i)
 			}
 		})
 	})
