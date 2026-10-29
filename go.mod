@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/gonvenience/bunt v1.4.3
-	github.com/gonvenience/neat v1.3.20
+	github.com/gonvenience/neat v1.4.0
 	github.com/gonvenience/ytbx v1.5.0
 	github.com/onsi/ginkgo/v2 v2.33.1
 	github.com/onsi/gomega v1.44.0
