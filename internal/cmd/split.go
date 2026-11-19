@@ -33,7 +33,8 @@ import (
 )
 
 var splitCmdSettings struct {
-	directory string
+	directory      string
+	documentMarker bool
 }
 
 // splitCmd represents the split command
@@ -89,7 +90,11 @@ var splitCmd = &cobra.Command{
 					return err
 				}
 
-				if err := os.WriteFile(filename, append([]byte("---\n"), bytes...), stat.Mode()); err != nil {
+				if splitCmdSettings.documentMarker {
+					bytes = append([]byte("---\n"), bytes...)
+				}
+
+				if err := os.WriteFile(filename, bytes, stat.Mode()); err != nil {
 					return err
 				}
 			}
@@ -103,4 +108,5 @@ func init() {
 	rootCmd.AddCommand(splitCmd)
 	splitCmd.Flags().SortFlags = false
 	splitCmd.Flags().StringVarP(&splitCmdSettings.directory, "directory", "d", "", "Write files to directory rather than current working directory")
+	splitCmd.Flags().BoolVar(&splitCmdSettings.documentMarker, "document-marker", false, "Prepend YAML document start marker (---) to each output file")
 }
